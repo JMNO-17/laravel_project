@@ -43,6 +43,7 @@
         <h1>Category List</h1>
         @foreach ($categories as $data)
             <p>{{ $data['id']}} : {{$data['name']}}</p>
+            <a href="{{route('categories.show', ['id' => $data->id])}}">Show</a>
         @endforeach
     </div>
 </body>
