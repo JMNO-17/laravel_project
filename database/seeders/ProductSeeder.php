@@ -13,7 +13,7 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        $product_data = [
+        $products = [
             [
                 'name' => 'Laptop',
                 'description' => 'Latest model laptop',
@@ -41,8 +41,8 @@ class ProductSeeder extends Seeder
             ],
         ];
 
-        foreach ($product_data as $data) {
-            Product::create($data);
+        foreach ($products as $product) {
+            Product::create($product);
         }
 
         
