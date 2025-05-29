@@ -9,28 +9,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        // $categories = [
-        //     [
-        //         'id' => 1,
-        //         'name' => 'Information Technology',
-        //     ],
-        //     [
-        //         'id' => 2,
-        //         'name' => 'Travel',
-        //     ],
-        //     [
-        //         'id' => 3,
-        //         'name' => 'Food',
-        //     ],
-        //     [
-        //         'id' => 4,
-        //         'name' => 'Health & Fitness',
-        //     ],
-        //     [
-        //         'id' => 5,
-        //         'name' => 'Education',
-        //     ],
-        // ];
+        
         $categories = Category::all();
 
         return view('categories.index', compact('categories'));
@@ -45,5 +24,48 @@ class CategoryController extends Controller
         $category = Category::find($id);
         // dd($category);
         return view('categories.show', compact('category'));
+    }
+
+    public function edit($id)
+    {
+    //    dd('here');
+    //    dd($id);
+       $category = Category::find($id);
+    //    dd($category);
+       return view('categories.edit', compact('category'));
+    }
+
+    public function update(Request $request){
+    //    dd(here);
+       $category = Category::find($request->id);
+
+       $category->update([
+            'name' => $request->name,
+        ]);
+
+        return redirect()->route('categories.index');
+    }
+
+    public function create()
+    {
+        return view('categories.create');
+    }
+
+    public function store(Request $request)
+    {
+        Category::create([
+            'name' => $request->name
+        ]);
+
+        return redirect()->route('categories.index');
+    }
+
+    public function delete($id)
+    {
+        $category = Category::find($id);
+
+        $category->delete();
+
+        return redirect()->route('categories.index');
     }
 }
