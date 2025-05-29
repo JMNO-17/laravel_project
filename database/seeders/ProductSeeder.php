@@ -17,27 +17,27 @@ class ProductSeeder extends Seeder
             [
                 'name' => 'Laptop',
                 'description' => 'Latest model laptop',
-                'price' => 1000.00,
+                'price' => 1000,
             ],
             [
                 'name' => 'Smartphone',
                 'description' => 'Latest model smartphone',
-                'price' => 800.00,
+                'price' => 800,
             ],
             [
                 'name' => 'Headphones',
                 'description' => 'Latest model headphones',
-                'price' => 200.00,
+                'price' => 200,
             ],
             [
                 'name' => 'Smartwatch',
                 'description' => 'Latest model smartwatch',
-                'price' => 400.00,
+                'price' => 400,
             ],
             [
                 'name' => 'Tablet',
                 'description' => 'Latest model tablet',
-                'price' => 600.00,
+                'price' => 600,
             ],
         ];
 
