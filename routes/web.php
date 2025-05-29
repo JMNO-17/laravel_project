@@ -50,8 +50,10 @@ Route::prefix('/dashboard')->group(function(){
 // });
 
 Route::get('/categories', [CategoryController::class, 'index']);
-Route::get('/user_data', [ArticleController::class, 'data']);
 Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
+
+Route::get('/articles', [ArticleController::class, 'index']);
+Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('articles.show');
 
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
