@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Http\Requests\EditUpdateRequest;
 
 class ProductController extends Controller
 {
@@ -28,16 +29,20 @@ class ProductController extends Controller
     }
 
 
-    public function update(Request $request){
+    public function update(EditUpdateRequest $request){
     
        $product = Product::find($request->id);
 
        $product->update([
             'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
         ]);
 
         return redirect()->route('products.index');
     }
+
+
 
     public function create()
     {
@@ -46,6 +51,12 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $product = $request->validate([
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'price' => 'required|integer'
+
+        ]);
         Product::create([
             'name' => $request->name,
             'description' => $request->description,
@@ -54,6 +65,7 @@ class ProductController extends Controller
 
         return redirect()->route('products.index');
     }
+
 
     public function delete($id)
     {
