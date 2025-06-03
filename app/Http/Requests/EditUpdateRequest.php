@@ -22,10 +22,11 @@ class EditUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
+
             'name' => 'required|string',
             'description' => 'required|string',
             'price' => 'required|integer',
+            'category_id' => 'required',
         ];
     }
 }

@@ -36,13 +36,36 @@
             <div class="card-header">
                 + Product Create
             </div>
-            <form action="{{ route('products.store') }}" method="POST">
+            <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
-                    <input type="text" class="form-control mb-2" placeholder="Enter product Name" name="name" />
-                    <input type="text" class="form-control mb-2" placeholder="Enter product Description" name="description" />
-                    <input type="text" class="form-control" placeholder="Enter product Price" name="price" />
+                    <label for="name" class="form-label">Name :</label>
+                    <input type="text" name="name" placeholder="Enter Product Name"
+                        class="form-control mb-2">
                 </div>
+                <div class="card-body">
+                    <label for="description" class="form-label">Description :</label>
+                    <input type="text" name="description" placeholder="Enter Product Description"
+                        class="form-control mb-2">
+                </div>
+                <div class="card-body">
+                    <label for="price" class="form-label">Price :</label>
+                    <input type="text" name="price" placeholder="Enter Product Price"
+                        class="form-control mb-2">
+                </div>
+                <div class="card-body">
+                    <input type="file" class="form-control" name="image" />
+                </div>
+
+                <div class="card-body">
+                    <label for="category" class="form-label">Category :</label>
+                    <select name="category_id" id="category_id">
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <div class="card-footer">
                     <button class="btn btn-primary me-2" type="submit">
                         Create

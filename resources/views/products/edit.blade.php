@@ -32,15 +32,33 @@
         </div>
         <div class="card mt-4">
             <div class="card-header">
-                Product Edit 
+                Product Edit
             </div>
-            <form action="{{route('products.update', $product->id)}}" method="POST">
+            <form action="{{route('products.update', $product->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
+
+
                 <div class="card-body">
-                    <input type="text" class="form-control" name="name" value="{{ $product->name }}"/>
-                    <input type="text" class="form-control" name="description" value="{{ $product->description }}"/>
-                    <input type="text" class="form-control" name="price" value="{{ $product->price }}"/>
+                    <input type="text" class="form-control mb-2" name="name" value="{{ $product->name }}"/>
+                    <input type="text" class="form-control mb-2" name="description" value="{{ $product->description }}"/>
+                    {{-- <input type="file" class="form-control mb-2" name="image"/> --}}
+
+                    <input type="text" class="form-control mb-2" name="price" value="{{ $product->price }}"/>
+
+                    <select name="category_id" id="">
+                        @foreach ($categories as $category )
+                            <option value="{{$category->id}}" @if ($category->id === $product->category_id)
+                                selected
+                            @endif>{{$category->name}}</option>
+                        @endforeach
+                    </select>
+
                 </div>
+
+
+
+
+
                 <div class="card-footer">
                     <button class="btn btn-primary me-2" type="submit">
                         Update
