@@ -7,10 +7,11 @@ use App\Models\Category;
 
 class CategoryRepository implements CategoryRepositoryInterface
 {
-    public function index() {
-         $categories = Category::all();
+    public function index()
+    {
+        $categories = Category::all();
 
-         return $categories;
+        return $categories;
     }
 
     public function store($category) {
@@ -21,5 +22,7 @@ class CategoryRepository implements CategoryRepositoryInterface
         $category = Category::find($id);
         return $category;
     }
+
+
 
 }
