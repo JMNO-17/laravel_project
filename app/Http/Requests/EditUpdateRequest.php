@@ -27,6 +27,7 @@ class EditUpdateRequest extends FormRequest
             'description' => 'required|string',
             'price' => 'required|integer',
             'category_id' => 'required',
+            'status' => 'required',
         ];
     }
 }

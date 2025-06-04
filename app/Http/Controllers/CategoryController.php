@@ -2,18 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-// use App\Models\Product;
 use App\Models\Category;
+// use App\Models\Product;
+use Illuminate\Http\Request;
+use App\Repositories\Category\CategoryRepository;
 use App\Http\Requests\CategoryUpdateRequest;
 
 
 class CategoryController extends Controller
 {
+    protected $categoryRepository;
+    public function __construct(CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
     public function index()
     {
 
-        $categories = Category::all();
+        // $categories = Category::all();
+
+        $categories = $this->categoryRepository->index();
 
         return view('categories.index', compact('categories'));
 
@@ -29,25 +37,6 @@ class CategoryController extends Controller
         return view('categories.show', compact('category'));
     }
 
-    public function edit($id)
-    {
-        $category = Category::find($id);
-
-        return view('categories.edit', compact('category'));
-    }
-
-    public function update(CategoryUpdateRequest $request)
-    {
-        $category = Category::find($request->id);
-
-        $category->update([
-            'name' => $request->name,
-        ]);
-
-        return redirect()->route('categories.index');
-    }
-
-
     public function create()
     {
         return view('categories.create');
@@ -58,6 +47,7 @@ class CategoryController extends Controller
         $category = $request->validate([
             'name' => 'required|string',
             'image'=> 'required',
+
         ]);
         if($request->hasFile('image')){
             $imageName = time() . '.' . $request->image->extension();
@@ -68,7 +58,28 @@ class CategoryController extends Controller
 
             $category = array_merge($category,['image' => $imageName]);
         }
-        Category::create($category);
+        // Category::create($category);
+        $this->categoryRepository->store($category);
+
+        return redirect()->route('categories.index');
+    }
+
+    public function edit($id)
+    {
+        // $category = Category::find($id);
+        $category = $this->categoryRepository->edit($id);
+
+        return view('categories.edit', compact('category'));
+    }
+
+    public function update(CategoryUpdateRequest $request)
+    {
+        // $category = Category::find($request->id);
+        $category = $this->categoryRepository->edit($request->id);
+
+        $category->update([
+            'name' => $request->name,
+        ]);
 
         return redirect()->route('categories.index');
     }
@@ -76,7 +87,8 @@ class CategoryController extends Controller
 
     public function delete($id)
     {
-        $category = Category::find($id);
+        // $category = Category::find($id);
+        $category = $this->categoryRepository->edit($id);
 
         $category->delete();
 

@@ -5,13 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Repositories\Product\ProductRepository;
 use App\Http\Requests\EditUpdateRequest;
 
 class ProductController extends Controller
 {
+    protected $productRepository;
+    public function __construct(ProductRepository $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
+
     public function index()
     {
-        $products = Product::with('category')->get();
+        // $products = Product::with('category')->get();
+        $products = $this->productRepository->index();
 
         return view('products.index', compact('products'));
     }
@@ -26,9 +34,8 @@ class ProductController extends Controller
 
     public function create()
     {
-        $categories = Category::all();
-
-        return view('products.create', compact('categories'));
+        $categories = $this->productRepository->create();
+        return view("products.create", compact("categories"));
     }
 
     public function store(Request $request)
@@ -39,6 +46,7 @@ class ProductController extends Controller
             'price' => 'required|integer',
             'image' => 'required',
             'category_id' => 'required',
+            'status' => 'required',
 
         ]);
 
@@ -54,30 +62,35 @@ class ProductController extends Controller
 
         }
 
-        Product::create($product);
+        // Product::create($product);
+        $this->productRepository->store($product);
 
         return redirect()->route('products.index');
     }
 
     public function edit($id)
     {
-       $product = Product::find($id);
-       $categories = Category::all();
+    //    $product = Product::find($id);
+    //    $categories = Category::all();
 
-       return view('products.edit', compact('product', 'categories'));
+    $categories = $this->productRepository->create();
+    $product = $this->productRepository->find($id);
+    return view("products.edit", compact('product', 'categories'));
 
     }
 
 
     public function update(EditUpdateRequest $request){
 
-       $product = Product::find($request->id);
+    //    $product = Product::find($request->id);
+        $product = $this->productRepository->edit($request->id);
 
        $product->update([
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
             'category_id' => $request->category_id,
+            "status" => $request->status ? 1 : 0,
         ]);
 
 
@@ -89,7 +102,8 @@ class ProductController extends Controller
 
     public function delete($id)
     {
-        $product = Product::find($id);
+        // $product = Product::find($id);
+         $product = $this->productRepository->edit($id);
 
         $product->delete();
 
