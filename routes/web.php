@@ -11,15 +11,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Static Route
-Route::get('/blogs', function(){
-    return "This is Blog.";
-});
+// // Static Route
+// Route::get('/blogs', function(){
+//     return "This is Blog.";
+// });
 
-// Dynamic Route
-Route::get('/blogs/{id}', function($id){
-    return "This is Blog Details - $id";
-});
+// // Dynamic Route
+// Route::get('/blogs/{id}', function($id){
+//     return "This is Blog Details - $id";
+// });
 
 // // Naming Route
 // Route::get('/dashboard', function(){
@@ -31,19 +31,19 @@ Route::get('/blogs/{id}', function($id){
 // });
 
 // Group Route
-Route::prefix('/dashboard')->group(function(){
-    Route::get('/admin', function(){
-        return "This is Admin Dashboard";
-    });
+// Route::prefix('/dashboard')->group(function(){
+//     Route::get('/admin', function(){
+//         return "This is Admin Dashboard";
+//     });
 
-    Route::get('/user', function(){
-        return "This is User Dashabord";
-    })->name('user');
+//     Route::get('/user', function(){
+//         return "This is User Dashabord";
+//     })->name('user');
 
-    Route::get('/tpp', function(){
-        return redirect()->route('user');
-    });
-});
+//     Route::get('/tpp', function(){
+//         return redirect()->route('user');
+//     });
+// });
 
 // Route::get('/categories', function(){
 //     return view('categories.index');
@@ -69,3 +69,7 @@ Route::post('/products/{id}/update', [ProductController::class, 'update'])->name
 Route::post('/products/{id}/delete', [ProductController::class, 'delete'])->name('products.delete');
 
 
+
+// Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
