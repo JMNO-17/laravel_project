@@ -1,33 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Category</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
-</head>
-<body>
-
-
+@extends('layouts.master')
+@section('content')
     <div class="container">
         <h1 class="mt-4">Category List</h1>
-        <a href="{{route('categories.create')}}" class="btn btn-outline-success mb-4">+Create</a>
-        <a href="{{route('products.index')}}" class="btn btn-outline-warning mb-4">Product List</a>
+        <a href="{{ route('categories.create') }}" class="btn btn-outline-success mb-4">+Create</a>
+        <a href="{{ route('products.index') }}" class="btn btn-outline-warning mb-4">Product List</a>
         <!-- @foreach ($categories as $category)
-            <p>{{ $category['id']}} : {{$category['name']}}</p>
-            <a href="{{route('categories.show', ['id' => $category->id])}}">Show</a>
-            <a href="{{route('categories.edit', ['id' => $category->id])}}">Edit</a>
+    <p>{{ $category['id'] }} : {{ $category['name'] }}</p>
+                <a href="{{ route('categories.show', ['id' => $category->id]) }}">Show</a>
+                <a href="{{ route('categories.edit', ['id' => $category->id]) }}">Edit</a>
 
-            <form action="{{ route('categories.delete', $category->id) }}" method="POST">
-                @csrf
-                 <button>Delete</button>
-            </form>
-
-
-
-        @endforeach -->
+                <form action="{{ route('categories.delete', $category->id) }}" method="POST">
+                    @csrf
+                     <button>Delete</button>
+                </form>
+    @endforeach -->
 
         <table class="table table-bordered">
             <thead>
@@ -41,14 +27,17 @@
             <tbody>
                 @foreach ($categories as $category)
                     <tr>
-                        <td>{{$category['id']}}</td>
-                        <td>{{$category['name']}}</td>
+                        <td>{{ $category['id'] }}</td>
+                        <td>{{ $category['name'] }}</td>
                         <td>
-                            <img src="{{ asset('categoryImages/'. $category->image) }}" alt="{{$category->image}}" style="width: 50px; height: 50px;"/>
+                            <img src="{{ asset('categoryImages/' . $category->image) }}" alt="{{ $category->image }}"
+                                style="width: 50px; height: 50px;" />
                         </td>
                         <td class="d-flex">
-                            <a href="{{route('categories.show', ['id' => $category->id])}}" class="btn btn-outline-primary me-2">Show</a>
-                            <a href="{{route('categories.edit', ['id' => $category->id])}}" class="btn btn-outline-warning me-2">Edit</a>
+                            <a href="{{ route('categories.show', ['id' => $category->id]) }}"
+                                class="btn btn-outline-primary me-2">Show</a>
+                            <a href="{{ route('categories.edit', ['id' => $category->id]) }}"
+                                class="btn btn-outline-warning me-2">Edit</a>
 
                             <form action="{{ route('categories.delete', $category->id) }}" method="POST">
                                 @csrf
@@ -60,6 +49,4 @@
             </tbody>
         </table>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-</body>
-</html>
+@endsection
