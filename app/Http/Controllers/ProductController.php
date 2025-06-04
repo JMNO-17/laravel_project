@@ -7,18 +7,21 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Repositories\Product\ProductRepository;
 use App\Http\Requests\EditUpdateRequest;
+use App\Repositories\Category\CategoryRepositoryInterface;
 
 class ProductController extends Controller
 {
     protected $productRepository;
-    public function __construct(ProductRepository $productRepository)
-    {
-        $this->productRepository = $productRepository;
-    }
+    protected $categoryRepository;
+    public function __construct(ProductRepository $productRepository, CategoryRepositoryInterface $categoryRepository)
+{
+    $this->productRepository = $productRepository;
+    $this->categoryRepository = $categoryRepository;
+}
+
 
     public function index()
     {
-        // $products = Product::with('category')->get();
         $products = $this->productRepository->index();
 
         return view('products.index', compact('products'));
@@ -34,7 +37,7 @@ class ProductController extends Controller
 
     public function create()
     {
-        $categories = $this->productRepository->create();
+        $categories = $this->categoryRepository->index();
         return view("products.create", compact("categories"));
     }
 
@@ -72,8 +75,7 @@ class ProductController extends Controller
     {
     //    $product = Product::find($id);
     //    $categories = Category::all();
-
-    $categories = $this->productRepository->create();
+    $categories = $this->categoryRepository->index();
     $product = $this->productRepository->find($id);
     return view("products.edit", compact('product', 'categories'));
 
