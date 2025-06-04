@@ -31,7 +31,7 @@
             @endif
         </div>
         <div class="card mt-4">
-            <div class="card-header">
+            <div class="card-header bg-secondary text-white">
                 Product Edit
             </div>
             <form action="{{route('products.update', $product->id)}}" method="POST" enctype="multipart/form-data">
@@ -53,11 +53,12 @@
                         @endforeach
                     </select>
 
+                    <div class="form-check form-switch mb-3">
+                        <input type="hidden" name="status" value="0">
+                        <input class="form-check-input" type="checkbox" id="status" name="status" value="1">
+                        <label class="form-check-label" for="status">Active</label>
+                    </div>
                 </div>
-
-
-
-
 
                 <div class="card-footer">
                     <button class="btn btn-primary me-2" type="submit">

@@ -15,28 +15,28 @@ class CategorySeeder extends Seeder
     {
         $categories = [
             [
-                
+
                 'name' => 'Information Technology',
             ],
             [
-                
+
                 'name' => 'Travel',
             ],
             [
-                
+
                 'name' => 'Food',
             ],
             [
-                
+
                 'name' => 'Health & Fitness',
             ],
             [
-                
+
                 'name' => 'Education',
             ],
         ];
 
-    
+
 
         foreach ($categories as $category) {
             Category::create($category);

@@ -35,6 +35,7 @@
                     <th class="bg-secondary text-white">Image</th>
                     <th class="bg-secondary text-white">Price</th>
                     <th class="bg-secondary text-white">CATEGORY</th>
+                    <th class="bg-secondary text-white">STATUS</th>
                     <th class="bg-secondary text-white">ACTION</th>
                 </tr>
             </thead>
@@ -47,7 +48,15 @@
                         <td><img src="{{asset('productImages/'.$product['image'])}}" alt="{{$product->image}}" style="width: 50px; height: 50px; border-radius: 50%;"></td>
                         {{-- <td><img src="{{asset("categoryImages/")}}" alt=""></td> --}}
                         <td>{{$product['price']}}</td>
-                        <td>{{ $product['category']['name'] }}</td>
+                        {{-- <td>{{ $product['category']['name'] }}</td> --}}
+                        <td>{{ $product->category ? $product->category->name : 'No Category' }}</td>
+
+                        @if ($product->status == 1)
+                            <td class="text-success">Active</td>
+                        @else
+                        <td class="text-danger">Suspend</td>
+                        @endif
+
                         <td class="d-flex">
                             <a href="{{route('products.show', ['id' => $product->id])}}" class="btn btn-outline-primary me-2">Show</a>
                             <a href="{{route('products.edit', ['id' => $product->id])}}" class="btn btn-outline-warning me-2">Edit</a>
