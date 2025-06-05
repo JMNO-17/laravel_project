@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\Routing\Router;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 
 
 Route::get('/', function () {
@@ -68,7 +69,13 @@ Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('pro
 Route::post('/products/{id}/update', [ProductController::class, 'update'])->name('products.update');
 Route::post('/products/{id}/delete', [ProductController::class, 'delete'])->name('products.delete');
 
-
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+Route::post('/users/store', [UserController::class, 'store'])->name('users.store');
+Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
+Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
+Route::post('/users/{id}/update', [UserController::class, 'update'])->name('users.update');
+Route::post('/users/{id}/delete', [UserController::class, 'delete'])->name('users.delete');
 
 // Auth::routes();
 

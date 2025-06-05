@@ -8,13 +8,13 @@
 
         <!-- @foreach ($products as $product)
     <p>{{ $product->id }} : {{ $product->name }} : {{ $product->description }} : ${{ $product->price }}</p>
-                                    <a href="{{ route('products.show', ['id' => $product->id]) }}">Show</a>
-                                    <a href="{{ route('products.edit', ['id' => $product->id]) }}">Edit</a>
+                                        <a href="{{ route('products.show', ['id' => $product->id]) }}">Show</a>
+                                        <a href="{{ route('products.edit', ['id' => $product->id]) }}">Edit</a>
 
-                                    <form action="{{ route('products.delete', $product->id) }}" method="POST">
-                                        @csrf
-                                        <button>Delete</button>
-                                    </form>
+                                        <form action="{{ route('products.delete', $product->id) }}" method="POST">
+                                            @csrf
+                                            <button>Delete</button>
+                                        </form>
     @endforeach -->
 
         <table class="table table-bordered">
@@ -43,17 +43,18 @@
                         {{-- <td>{{ $product['category']['name'] }}</td> --}}
                         <td>{{ $product->category ? $product->category->name : 'No Category' }}</td>
 
-                        @if ($product->status == 1)
-                            <td class="text-success">Active</td>
-                        @else
-                            <td class="text-danger">Suspend</td>
-                        @endif
+                        <td class="{{ $product->status == 1 ? 'text-success' : 'text-danger' }}">
+                            {{ $product->status == 1 ? 'Active' : 'Suspend' }}
+                        </td>
 
                         <td class="d-flex">
-                            <a href="{{ route('products.show', ['id' => $product->id]) }}"
-                                class="btn btn-outline-primary me-2">Show</a>
-                            <a href="{{ route('products.edit', ['id' => $product->id]) }}"
-                                class="btn btn-outline-warning me-2">Edit</a>
+                            <div>
+                                <a href="{{ route('products.show', ['id' => $product->id]) }}"
+                                    class="btn btn-outline-primary me-2">Show</a>
+                                <a href="{{ route('products.edit', ['id' => $product->id]) }}"
+                                    class="btn btn-outline-warning me-2">Edit</a>
+
+                            </div>
 
                             <form action="{{ route('products.delete', $product->id) }}" method="POST">
                                 @csrf
