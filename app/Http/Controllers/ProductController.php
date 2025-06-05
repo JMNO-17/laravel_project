@@ -93,6 +93,7 @@ class ProductController extends Controller
             'price' => $request->price,
             'category_id' => $request->category_id,
             "status" => $request->status ? 1 : 0,
+            
         ]);
 
 
