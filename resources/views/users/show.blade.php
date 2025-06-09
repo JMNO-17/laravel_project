@@ -19,11 +19,18 @@
                 <img src="{{ asset('userImages/' . $user->image) }}" alt="{{ $user->image }}"
                     style="width: 50px; height: 50px;" />
 
-                @if ($user->status == 1)
+                {{-- @if ($user->status == 1)
                     <p class="text-success">Active</p>
                 @else
                     <p class="text-danger">Suspend</p>
-                @endif
+                @endif --}}
+
+                <form action="{{ route('users.status', ['id' => $user->id]) }}" method="POST">
+                    @csrf
+                    <button class="btn btn-sm {{ $user->status === 1 ? 'btn-success' : 'btn-danger' }}" type="submit">
+                        {{ $user->status === 1 ? 'Active' : 'Inactive' }}
+                    </button>
+                </form>
 
             </div>
             <div class="card-footer">
@@ -32,4 +39,4 @@
 
         </div>
     </div>
-    @endsection
+@endsection

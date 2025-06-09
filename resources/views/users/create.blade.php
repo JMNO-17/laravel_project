@@ -45,18 +45,19 @@
                     <input type="text" name="address" placeholder="Enter Address" class="form-control mb-2">
 
                     <label for="image" class="form-label">User Profile Image:</label>
-                    <input type="file" class="form-control mb-2" name="image" id="image"/>
+                    <input type="file" class="form-control mb-2" name="image" id="image" />
 
                     <label for="password" class="form-label">Password:</label>
                     <input type="password" class="form-control mb-2" name="password" id="password"
                         placeholder="Enter Password" autocomplete="new-password" required>
 
 
-                    <div class="form-check form-switch mb-3">
+                    {{-- <div class="form-check form-switch mb-3">
                         <input type="hidden" name="status" value="0">
                         <input class="form-check-input" type="checkbox" id="status" name="status" value="1">
                         <label class="form-check-label" for="status">Active</label>
-                    </div>
+                    </div> --}}
+
 
 
                 </div>

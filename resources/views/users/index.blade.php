@@ -36,11 +36,21 @@
 
 
 
-                        @if ($user->status == 1)
+                        {{-- @if ($user->status == 1)
                             <td class="text-success">Active</td>
                         @else
                             <td class="text-danger">Suspend</td>
-                        @endif
+                        @endif --}}
+
+                        <td>
+                            <form action="{{ route('users.status', ['id' => $user->id]) }}" method="POST">
+                                @csrf
+                                <button class="btn btn-sm {{ $user->status === 1 ? 'btn-success' : 'btn-danger' }}"
+                                    type="submit">
+                                    {{ $user->status === 1 ? 'Active' : 'Inactive' }}
+                                </button>
+                            </form>
+                        </td>
 
                         <td class="d-flex">
                             <a href="{{ route('users.show', ['id' => $user->id]) }}"
