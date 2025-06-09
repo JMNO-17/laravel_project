@@ -14,7 +14,7 @@ class UserRepository implements UserRepositoryInterface
         return $users;
     }
 
-    public function store(array $user): User
+    public function store($user)
     {
         return User::create($user);
     }
@@ -24,6 +24,6 @@ class UserRepository implements UserRepositoryInterface
         return $user;
     }
 
-
+    
 
 }

@@ -4,16 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Repositories\User\UserRepository;
+use App\Http\Requests\UserRequest;
+use App\Services\User\UserService;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserUpdateRequest;
+use App\Repositories\User\UserRepository;
+use App\Repositories\User\UserRepositoryInterface;
 
 class UserController extends Controller
 {
     protected $userRepository;
+    protected $userService;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepositoryInterface $userRepository, UserService $userService)
     {
         $this->userRepository = $userRepository;
+        $this->userService = $userService;
+        $this->middleware('auth');
     }
 
     public function index()
@@ -33,25 +40,28 @@ class UserController extends Controller
         return view('users.create');
     }
 
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required',
-            'phone' => 'required|string',
-            'gender' => 'required|string',
-            'address' => 'required|string',
-            'status' => 'required|boolean',
-            'image' => 'required',
-        ]);
-
+        // dd($request->all());
+        $validated = $request->validated();
+        // dd($validated);
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->image->extension();
             $request->image->move(public_path('userImages'), $imageName);
-            $validated['image'] = $imageName;
+            // $validated['image'] = $imageName;
+            $validated = array_merge($validated, ['image' => $imageName]);
         }
 
-        $this->userRepository->store($validated);
+        $this->userRepository->store([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'phone' => $validated['phone'],
+            'gender' =>  $validated['gender'],
+            'address' => $validated['address'],
+            'status' => $validated['status'],
+            'image' => $validated['image'],
+            'password' => Hash::make($validated['password']),
+        ]);
         return redirect()->route('users.index');
     }
 
@@ -91,8 +101,22 @@ class UserController extends Controller
 
     public function delete($id)
     {
+        // dd($id);
+
+
         $user = $this->userRepository->edit($id);
+        //  dd($user);
         $user->delete();
+
+        return redirect()->route('users.index');
+    }
+
+    public function userStatus($id)
+    {
+        // $user = User::find();
+        $this->userService->status($id);
+        // $user->status = $user->status === 1 ? 0 : 1;
+        // $user->save();
         return redirect()->route('users.index');
     }
 }

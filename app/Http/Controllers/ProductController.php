@@ -13,10 +13,12 @@ class ProductController extends Controller
 {
     protected $productRepository;
     protected $categoryRepository;
+
     public function __construct(ProductRepository $productRepository, CategoryRepositoryInterface $categoryRepository)
 {
     $this->productRepository = $productRepository;
     $this->categoryRepository = $categoryRepository;
+    $this->middleware('auth');
 }
 
 
@@ -93,7 +95,7 @@ class ProductController extends Controller
             'price' => $request->price,
             'category_id' => $request->category_id,
             "status" => $request->status ? 1 : 0,
-            
+
         ]);
 
 

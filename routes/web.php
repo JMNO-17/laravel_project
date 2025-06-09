@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\Routing\Router;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArticleController;
@@ -77,6 +78,8 @@ Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edi
 Route::post('/users/{id}/update', [UserController::class, 'update'])->name('users.update');
 Route::post('/users/{id}/delete', [UserController::class, 'delete'])->name('users.delete');
 
-// Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::post('/users/{id}/status', [UserController::class, 'userStatus'])->name('users.status');

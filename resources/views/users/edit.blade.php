@@ -47,11 +47,12 @@
                     <input type="file" class="form-control mb-2" name="image" id="image"/>
 
 
-                    <div class="form-check form-switch mb-3">
+                    {{-- <div class="form-check form-switch mb-3">
                         <input type="hidden" name="status" value="0">
                         <input class="form-check-input" type="checkbox" id="status" name="status" value="1">
                         <label class="form-check-label" for="status">Active</label>
-                    </div>
+                    </div> --}}
+                    
                 </div>
 
                 <div class="card-footer">
