@@ -9,7 +9,10 @@ use App\Repositories\Category\CategoryRepository;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\Product\ProductRepositoryInterface;
 use App\Repositories\Category\CategoryRepositoryInterface;
-
+use App\Repositories\Permission\permissionRepository;
+use App\Repositories\Permission\permissionRepositoryInterface;
+use App\Repositories\Role\RoleRepository;
+use App\Repositories\Role\RoleRepositoryInterface;
 
 class RepostioryServiceProvider extends ServiceProvider
 {
@@ -26,9 +29,12 @@ class RepostioryServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->app->singleton(RoleRepositoryInterface::class,RoleRepository::class);
+
         $this->app->singleton(CategoryRepositoryInterface::class, CategoryRepository::class);
         $this->app->singleton(ProductRepositoryInterface::class, ProductRepository::class);
         $this->app->singleton(UserRepositoryInterface::class, UserRepository::class);
+        $this->app->singleton(permissionRepositoryInterface::class,permissionRepository::class);
 
     }
 }

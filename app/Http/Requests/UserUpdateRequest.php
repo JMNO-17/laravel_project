@@ -30,6 +30,8 @@ class UserUpdateRequest extends FormRequest
             'status' => 'required',
             'image' => 'nullable',
             // 'password' => 'required',
+            'roles' => 'required|exists:roles,id',
+
         ];
     }
 }

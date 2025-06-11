@@ -1,6 +1,8 @@
 @extends('layouts.master')
 @section('content')
 
+{{-- {{print_r($user->roles)}} --}}
+
 
     <div class="container">
         <div class="mt-4 text-danger">
@@ -17,8 +19,8 @@
                 user Edit
             </div>
             <form action="{{ route('users.update', $user->id) }}" method="POST" enctype="multipart/form-data">
-                @csrf
 
+                @csrf
 
                 <div class="card-body">
                     <input type="text" class="form-control mb-2" name="name" value="{{ $user->name }}" />
@@ -43,16 +45,26 @@
                     <label for="address" class="form-label">Address:</label>
                     <input type="text" class="form-control mb-2" name="address" value="{{ $user->address }}" />
 
+                <div class="card-body">
+                    <label for="roles">Select Roles</label>
+                    <select name="roles" id="" class="form-select select">
+                        @foreach ($roles as $role)
+                        <option value="{{$role->id}}" @foreach ($user->roles as $userRole)
+                            {{$userRole->id === $role->id ? 'selected' : '' }}
+                        @endforeach>{{$role->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+
                     <label for="image" class="form-label">User Profile Image:</label>
-                    <input type="file" class="form-control mb-2" name="image" id="image"/>
+                    <input type="file" class="form-control mb-2" name="image" id="image" />
 
-
-                    {{-- <div class="form-check form-switch mb-3">
+                    <div class="form-check form-switch mb-3">
                         <input type="hidden" name="status" value="0">
-                        <input class="form-check-input" type="checkbox" id="status" name="status" value="1">
+                        <input class="form-check-input" type="checkbox" id="status" name="status" value="1" checked>
                         <label class="form-check-label" for="status">Active</label>
-                    </div> --}}
-                    
+                    </div>
+
                 </div>
 
                 <div class="card-footer">

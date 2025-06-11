@@ -16,7 +16,7 @@ class UserService
 
     public function status($id)
     {
-        $user = $this->userRepository->edit($id);
+        $user = $this->userRepository->show($id);
 
         $user->status = $user->status === 1 ? 0 : 1;
 

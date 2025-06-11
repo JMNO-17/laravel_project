@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Product;
 use App\Models\Category;
-// use App\Models\Product;
 use Illuminate\Http\Request;
-use App\Repositories\Category\CategoryRepository;
 use App\Http\Requests\CategoryUpdateRequest;
+use App\Repositories\Category\CategoryRepository;
 
 
 class CategoryController extends Controller
@@ -95,4 +96,19 @@ class CategoryController extends Controller
 
         return redirect()->route('categories.index');
     }
+
+    public function categoriesCount()
+    {
+        $categories = Category::all();
+
+        // dd($categories);
+        $totalCategories = count($categories);
+        // dd($totalCategories);
+        return view('index', compact('totalCategories'));
+    }
+
+
+
+
+
 }
