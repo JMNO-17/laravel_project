@@ -1,4 +1,4 @@
-{{-- <div class="app-sidebar sidebar-shadow">
+<div class="app-sidebar sidebar-shadow">
     <div class="app-header__logo">
         <div class="logo-src"></div>
         <div class="header__pane ml-auto">
@@ -63,7 +63,21 @@
                         <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                     </a>
                 </li>
+                <li>
+                    <a href="{{route('roles.index')}}">
+                        <i class="metismenu-icon pe-7s-diamond"></i>
+                        Role
+                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('permissions.index')}}">
+                        <i class="metismenu-icon pe-7s-diamond"></i>
+                        Permission
+                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
-</div> --}}
+</div>

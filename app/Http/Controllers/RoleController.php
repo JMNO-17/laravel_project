@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\Role\RoleRepositoryInterface;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
 use App\Http\Requests\RoleRequest;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use App\Repositories\Role\RoleRepositoryInterface;
 
 class RoleController extends Controller
 {
@@ -73,9 +74,12 @@ class RoleController extends Controller
      */
     public function edit(string $id)
     {
+        $permissions = Permission::get();
         $role = Role::find($id);
 
-        return view('roles.edit', compact('role'));
+        $rolePermissions = $role->permissions->pluck('id')->toArray();
+
+        return view('roles.edit', compact('role','permissions','rolePermissions'));
     }
 
     /**
@@ -88,7 +92,10 @@ class RoleController extends Controller
         $role->update([
             'name' => $request->name,
 
+
         ]);
+
+        $role->permissions()->sync($request->permissions);
 
         return redirect()->route('roles.index');
     }
