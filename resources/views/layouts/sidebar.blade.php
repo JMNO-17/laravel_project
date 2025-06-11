@@ -1,4 +1,4 @@
-<div class="app-sidebar sidebar-shadow">
+{{-- <div class="app-sidebar sidebar-shadow">
     <div class="app-header__logo">
         <div class="logo-src"></div>
         <div class="header__pane ml-auto">
@@ -41,11 +41,13 @@
                 </li>
                 <li class="app-sidebar__heading">UI Components</li>
                 <li>
+                    @can('categoryList')
                     <a href="{{route('categories.index')}}">
                         <i class="metismenu-icon pe-7s-diamond"></i>
                         Category
                         <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                     </a>
+                    @endcan
                 </li>
                 <li>
                     <a href="{{route('products.index')}}">
@@ -64,4 +66,4 @@
             </ul>
         </div>
     </div>
-</div>
+</div> --}}

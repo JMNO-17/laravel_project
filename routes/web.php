@@ -1,12 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\Routing\Router;
+use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PermissionController;
 
 
 Route::get('/', function () {
@@ -82,4 +84,12 @@ Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::post('/users/{id}/status', [UserController::class, 'userStatus'])->name('users.status');
+Route::resource('/roles', RoleController::class);
+Route::resource('/permissions', PermissionController::class);
+
+Route::post('/users/{id}/status', [UserController::class, 'status'])->name('users.status');
+
+
+
+Route::get('/home', [CategoryController::class, 'categoriesCount'])->name('home');
+

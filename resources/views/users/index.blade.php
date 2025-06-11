@@ -17,6 +17,7 @@
                     <th class="bg-secondary text-white">PHONE</th>
                     <th class="bg-secondary text-white">GENDER</th>
                     <th class="bg-secondary text-white">ADDRESS</th>
+                    <th class="bg-secondary text-white">ROLE</th>
                     <th class="bg-secondary text-white">STATUS</th>
                     <th class="bg-secondary text-white">ACTION</th>
                 </tr>
@@ -34,6 +35,13 @@
                         <td>{{ $user['gender'] }}</td>
                         <td>{{ $user['address'] }}</td>
 
+                        <td>
+                            @foreach ($user->roles as $role)
+                                <span class="badge badge-info">
+                                    {{ $role->name }}
+                                </span>
+                            @endforeach
+                        </td>
 
 
                         {{-- @if ($user->status == 1)
@@ -60,6 +68,7 @@
 
                             <form action="{{ route('users.delete', $user->id) }}" method="POST">
                                 @csrf
+                                
                                 <button class="btn btn-outline-danger">Delete</button>
                             </form>
                         </td>

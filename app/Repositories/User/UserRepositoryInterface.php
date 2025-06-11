@@ -5,6 +5,15 @@ namespace App\Repositories\User;
 interface UserRepositoryInterface
 {
     public function index();
-    public function store($user);
-    public function edit($id);
+
+    public function store($validatedData);
+
+    public function show($id);
+
+    public function create();
+
+    public function update($validatedData, $id);
+
+    public function delete($id);
+
 }
