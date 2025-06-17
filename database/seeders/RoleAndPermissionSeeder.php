@@ -22,14 +22,24 @@ class RoleAndPermissionSeeder extends Seeder
         $categoryUpdate = Permission::create(['name' => 'categoryUpdate']);
         $categoryDelete = Permission::create(['name' => 'categoryDelete']);
 
-        $admin->givePErmissionTo([
+        $productList = Permission::create(['name' => 'productList']);
+        $productCreate = Permission::create(['name' => 'productCreate']);
+        $productUpdate = Permission::create(['name' => 'productUpdate']);
+        $cproductDelete = Permission::create(['name' => 'productDelete']);
+
+        $admin->givePermissionTo([
             $categoryList,
             $categoryCreate,
             $categoryUpdate,
             $categoryDelete,
+            $productList,
+            $productCreate,
+            $productUpdate,
+            $cproductDelete,
         ]);
         $client->givePermissionTo([
             $categoryList,
+            $productList,
         ]);
     }
 }
