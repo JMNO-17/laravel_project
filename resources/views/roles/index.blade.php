@@ -24,7 +24,7 @@
                              <a href="{{ route('roles.show', ['role' => $role->id]) }}"
                                 class="btn btn-outline-primary me-2">Show</a>
                             {{-- @can('roleUpdate') --}}
-                             <a href="{{ route('roles.update', ['role' => $role->id]) }}"
+                             <a href="{{ route('roles.edit', ['role' => $role->id]) }}"
                                 class="btn btn-outline-warning me-2">Edit</a>
                             {{-- @endcan --}}
                             {{-- @can('roleDelete') --}}
