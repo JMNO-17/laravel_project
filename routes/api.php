@@ -16,13 +16,11 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/auth/login', [AuthController::class, 'login']);
 
-
 Route::apiResource('/users', UserController::class);
 
 Route::apiResource('/roles', RoleController::class);
 
 Route::apiResource('/permissions', PermissionController::class);
-
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/auth/register', [AuthController::class, 'register']);
@@ -30,14 +28,4 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('/categories', CategoryController::class);
 
     Route::apiResource('/products', ProductController::class);
-
 });
-
-
-
-
-
-
-
-
-
