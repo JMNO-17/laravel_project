@@ -40,22 +40,22 @@ class RoleController extends BaseController
     public function store(Request $request)
     {
         $validation = Validator::make($request->all(), [
-
             'name' => 'required|string',
-            'permissions' => 'required',
+            'permissions' => 'required|exists:permissions,id',
         ]);
 
         if ($validation->fails()) {
             return $this->error('Validation Error', $validation->errors(), 422);
         }
 
-        $role = $this->roleRepository->store([
-
+        $data = $this->roleRepository->store([
             'name' => $request->name,
-            'permissions' => $request->permissions,
+            'permissions' => [$request->permissions],
         ]);
 
-        return $this->success(new RoleResource($role), "Role Created Successfully", 200);
+        $data->permissions()->sync($request->permissions);
+
+        return $this->success(new RoleResource($data), "Role Created Successfully", 200);
     }
 
     /**
@@ -76,16 +76,23 @@ class RoleController extends BaseController
     {
         $validation = Validator::make($request->all(), [
             'name' => 'required',
+            'permissions' => 'required|exists:permissions,id',
         ]);
 
         if ($validation->fails()) {
             return $this->error("Validation Error", $validation->errors(), 422);
         }
 
-        $role = $this->roleRepository->edit($id);
-        $role->update($request->all());
 
-        return $this->success(new RoleResource($role), "Role Updated Successfully", 200);
+        $data = $this->roleRepository->store([
+            'name' => $request->name,
+            'permissions' => [$request->permissions],
+        ]);
+
+        $data->permissions()->sync($request->permissions);
+        $data->update($request->all());
+
+        return $this->success(new RoleResource($data), "Role Updated Successfully", 200);
     }
 
     /**
