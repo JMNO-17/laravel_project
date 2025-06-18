@@ -21,10 +21,10 @@ class UserController extends BaseController
         $this->userRepository = $userRepository;
         $this->userService = $userService;
 
-        // $this->middleware('permission:userList', ['only' => ['index']]);
-        // $this->middleware('permission:userCreate', ['only' => ['store']]);
-        // $this->middleware('permission:userUpdate', ['only' => ['update']]);
-        // $this->middleware('permission:userDelete', ['only' => ['destroy']]);
+        $this->middleware('permission:userList', ['only' => ['index']]);
+        $this->middleware('permission:userCreate', ['only' => ['store']]);
+        $this->middleware('permission:userUpdate', ['only' => ['update']]);
+        $this->middleware('permission:userDelete', ['only' => ['destroy']]);
     }
 
     /**

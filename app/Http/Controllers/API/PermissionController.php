@@ -19,6 +19,11 @@ class PermissionController extends BaseController
     public function __construct(permissionRepositoryInterface $permissionRepository)
     {
         $this->permissionRepository = $permissionRepository;
+
+        $this->middleware('permission:permissionList', ['only' => ['index']]);
+        $this->middleware('permission:permissionCreate', ['only' => ['store']]);
+        $this->middleware('permission:permissionUpdate', ['only' => ['update']]);
+        $this->middleware('permission:permissionDelete', ['only' => ['destroy']]);
     }
 
     /**

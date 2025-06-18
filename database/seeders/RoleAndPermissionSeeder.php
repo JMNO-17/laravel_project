@@ -25,7 +25,22 @@ class RoleAndPermissionSeeder extends Seeder
         $productList = Permission::create(['name' => 'productList']);
         $productCreate = Permission::create(['name' => 'productCreate']);
         $productUpdate = Permission::create(['name' => 'productUpdate']);
-        $cproductDelete = Permission::create(['name' => 'productDelete']);
+        $productDelete = Permission::create(['name' => 'productDelete']);
+
+        $userList = Permission::create(['name' => 'userList']);
+        $userCreate = Permission::create(['name' => 'userCreate']);
+        $userUpdate = Permission::create(['name' => 'userUpdate']);
+        $userDelete = Permission::create(['name' => 'userDelete']);
+
+        $roleList = Permission::create(['name' => 'roleList']);
+        $roleCreate = Permission::create(['name' => 'roleCreate']);
+        $roleUpdate = Permission::create(['name' => 'roleUpdate']);
+        $roleDelete = Permission::create(['name' => 'roleDelete']);
+
+        $permissionList = Permission::create(['name' => 'permissionList']);
+        $permissionCreate = Permission::create(['name' => 'permissionCreate']);
+        $permissionUpdate = Permission::create(['name' => 'permissionUpdate']);
+        $permissionDelete = Permission::create(['name' => 'permissionDelete']);
 
         $admin->givePermissionTo([
             $categoryList,
@@ -35,11 +50,25 @@ class RoleAndPermissionSeeder extends Seeder
             $productList,
             $productCreate,
             $productUpdate,
-            $cproductDelete,
+            $productDelete,
+            $userList,
+            $userCreate,
+            $userUpdate,
+            $userDelete,
+            $roleList,
+            $roleCreate,
+            $roleUpdate,
+            $roleDelete,
+            $permissionList,
+            $permissionCreate,
+            $permissionUpdate,
+            $permissionDelete,
+
         ]);
         $client->givePermissionTo([
             $categoryList,
             $productList,
+
         ]);
     }
 }

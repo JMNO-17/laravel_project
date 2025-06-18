@@ -17,10 +17,10 @@ class RoleController extends BaseController
     {
         $this->roleRepository = $roleRepository;
 
-        // Middleware for permission control (uncomment when ready to use)
-        // $this->middleware('permission:roleList', ['only' => ['index']]);
-        // $this->middleware('permission:roleCreate', ['only' => ['store']]);
-        // $this->middleware('permission:roleUpdate', ['only' => ['update']]);
+        $this->middleware('permission:roleList', ['only' => ['index']]);
+        $this->middleware('permission:roleCreate', ['only' => ['store']]);
+        $this->middleware('permission:roleUpdate', ['only' => ['update']]);
+        $this->middleware('permission:roleDelete', ['only' => ['destroy']]);
     }
 
     /**
